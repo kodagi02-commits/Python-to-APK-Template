@@ -1,53 +1,35 @@
 [app]
-#标题允许中文 title language is not limited
-title = appname
-package.name = packagename
-
-#release模式不能用org.test 'org.test' can't be used in release mode
+title = Hitster Reader
+package.name = hitsterreader
 package.domain = org.test
-#工作目录 working directory
 source.dir = .
-#需要打包的文件类型 file types to be packed
-source.include_exts = py,png,jpg,kv,atlas
-#打包image目录下的文件 Pack files in the image directory
-#source.include_patterns = image/*
-version = 0.0.1
-#依赖库,后二为打包需要 The last two are needed for packaging
-requirements = python3, kivy==2.3.1, kivymd==1.2.0, pandas, openpyxl, qrcode, pillow, opencv-python
-#icon.filename = icon.png
-#presplash.filename = presplash.png
-#fullscreen = 0
-#orientation = portrait
-#主程序 Main,what can I say.Mamba out
-entrypoint = main.py
+source.include_exts = py,png,jpg,kv,atlas,xlsx
+version = 0.1
 
-#这些不要改 Don't change these
+# Itt pontosan beállítottuk a stabil verziókat
+requirements = python3, kivy==2.3.1, kivymd==1.2.0, pandas, openpyxl, qrcode, pillow, opencv-python
+
+entrypoint = main.py
+icon.filename = %(source.dir)s/kivymd/images/logo/kivymd-icon-512.png
+
+# Android konfigurációk a KivyMD 1.2.0-hoz
 android.accept_sdk_license = True
-android.allow_api_min = 21
 android.api = 33
-android.minapi = 21
+android.minapi = 24
 android.ndk = 25b
-exclude_patterns = **/test/*, **/tests/*
-android.gradle_download = https://services.gradle.org/distributions/gradle-7.6.4-all.zip
+android.ndk_api = 21
+
+# Kamera és Internet engedélyek tisztán megadva
+android.permissions = INTERNET, CAMERA
+
+# Háttérrendszerek a fagyásmentes felhős fordításhoz
+android.gradle_download = https://gradle.org
 android.gradle_plugin = 7.4.2
 android.sdk = 33
-android.ndk_api = 21
 p4a.gradle_dependencies = gradle:7.6.4
 p4a.bootstrap = sdl2
 p4a.gradle_options = -Dorg.gradle.java.home=/usr/lib/jvm/java-17-openjdk-amd64
-#打包需要网络权限 Network permission is required for packaging
-android.permissions = INTERNET, CAMERA
-
-#以下为release模式需要 Following is required for release mode
-
-#强制构建APK而不是AAB,但没用 Why does it build .aab instead of .apk?
-#android.aab = False
-
-#签名配置 signature configuration
-#android.keystore = /home/runner/work/RepositoryName/AndAgain/DomainName.PackageName.keystore
-#android.keystore_storepass = android
-#android.keystore_keypass = android
-#android.keystore_alias = DomainName.PackageName
+exclude_patterns = **/test/*, **/tests/*
 
 [buildozer]
 log_level = 2
